@@ -4,17 +4,20 @@ This repository contains the examples and demos that were given as an introducti
 
 ## 1. [Monoid](sessions/1.Monoid.md)
 
+### Topics:
+- Cats typeclasses (superficial)
+- Monoids & Laws
+    - Identity Element
+    - Associativity
+    - Commutativity
+- Testings laws with property-based tests
+- Practical examples of Monoids
+
+
 ## 2. [Applicative](sessions/2.Applicative.md)
+
+### Topics:
 
 ## 3. [Monad](sessions/3.Monad.md)
 
-
-# References
-
-List of resources used to create these sessions
-
-- https://typelevel.org/cats/typeclasses.html#type-classes-in-cats
-
-- https://eed3si9n.com/herding-cats/Applicative.html
-
-- https://eed3si9n.com/herding-cats/Monad.html
+### Topics:
