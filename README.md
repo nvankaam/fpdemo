@@ -13,7 +13,6 @@ This repository contains the examples and demos that were given as an introducti
 - Testings laws with property-based tests
 - Practical examples of Monoids
 
-
 ## 2. [Applicative](sessions/2.Applicative.md)
 
 ### Topics:
