@@ -4,8 +4,10 @@ import net.vankaam.fpdemo.model._
 import net.vankaam.fpdemo.session2.applicative.RandomInstance._
 import net.vankaam.fpdemo.session2.applicative.ProbabilityInstance._
 
-/*
-  A generic gamble implementation using the fact that T is a functor
+
+/**
+ * A generic gamble implementation using the Functor implementation from T
+ * @return Boolean whether the guess was correct, wrapped in T
  */
 def gamble[T[_]: Functor](coin: T[Coin], guess: Coin): T[Boolean] = {
   coin.map(x => x == guess)

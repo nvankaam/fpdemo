@@ -5,8 +5,8 @@ import net.vankaam.fpdemo.session2.applicative.RandomInstance._
 import net.vankaam.fpdemo.session2.applicative.ProbabilityInstance._
 
 /**
- * Counts the number of heads, using a foldable container (List), and Applicative(T)
- * @return
+ * Generic head count implementation, using a Foldable container (List), and Applicative(T)
+ * @return HeadCount wrapped in T
  */
 def countHeads[T[_]: Applicative](coins: List[T[Coin]]): T[Int] = {
   val heads: List[T[Int]] = coins.map(coinT => coinT.map(coin => if (coin == Head()) 1 else 0))
