@@ -16,7 +16,13 @@ This repository contains the examples and demos that were given as an introducti
 ## 2. [Applicative](sessions/2.Applicative.md)
 
 ### Topics:
+- Functor
+- Applicative
+- Random & Probability Applicative
+- Similarities & Differences between Applicative and Monoid
 
 ## 3. [Monad](sessions/3.Monad.md)
 
 ### Topics:
+- Monad
+- TBD
