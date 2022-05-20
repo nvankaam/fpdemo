@@ -11,10 +11,10 @@ object ProbabilityInstance {
 
     override def flatMap[A, B](fa: Probability[A])(f: A => Probability[B]): Probability[B] = {
       Probability(
-        fa.data.toVector
-          .flatMap({ case (value, prob) =>
-            f(value).data.map({ case (newValue, prob2) =>
-              (newValue, prob * prob2)
+        fa.data.toList
+          .flatMap({ case (value, p) =>
+            f(value).data.map({ case (fvalue, fp) =>
+              fvalue -> fp * p
             })
           })
           .groupMapReduce(_._1)(_._2)(_ + _)

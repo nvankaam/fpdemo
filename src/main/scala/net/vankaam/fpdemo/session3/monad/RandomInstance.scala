@@ -10,7 +10,11 @@ object RandomInstance {
       override def sample(): A = x
     }
 
-    override def flatMap[A, B](fa: Random[A])(f: A => Random[B]): Random[B] = f(fa.sample())
+    override def flatMap[A, B](fa: Random[A])(f: A => Random[B]): Random[B] = new Random[B] {
+      override def sample(): B = {
+        f(fa.sample()).sample()
+      }
+    }
 
     /* not tail recursive, just for demo purposes */
     override def tailRecM[A, B](a: A)(f: A => Random[Either[A, B]]): Random[B] = flatMap(f(a)) {

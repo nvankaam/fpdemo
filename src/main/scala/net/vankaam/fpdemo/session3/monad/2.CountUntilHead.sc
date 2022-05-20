@@ -4,19 +4,19 @@ import net.vankaam.fpdemo.model._
 import net.vankaam.fpdemo.session3.monad.RandomInstance._
 import net.vankaam.fpdemo.session3.monad.ProbabilityInstance._
 
-def countUntilHead[M[_]: Monad](coins: () => M[Coin], count: Int = 1): M[Int] = {
-  coins()
-    .flatMap(value => {
-      if (value == Head()) {
-        Monad[M].pure(count)
-      } else {
-        countUntilHead(coins, count + 1)
-      }
-    })
+def countUntilHead[T[_]: Monad](coinGenerator: () => T[Coin], count: Int = 1): T[Int] = {
+  coinGenerator().flatMap(coin => {
+    if (coin == Head()) {
+      Monad[T].pure(count)
+    } else {
+      countUntilHead(coinGenerator, count + 1)
+    }
+  })
 }
 
-// This one will finish, as it is just based on samples
-val randomUntilHead = countUntilHead(() => RandomInstances.fairCoin)
+val randomCoinGenerator: () => Random[Coin] = () => RandomInstances.fairCoin
+val headCount = countUntilHead(randomCoinGenerator)
 
-// This one will never finish
-val probabilityUntilHead = countUntilHead(() => ProbabilityInstances.fairCoin)
+// This will run forever
+//val probabilityCoinGenerator: () => Probability[Coin] = () => ProbabilityInstances.fairCoin
+//val probHeadCount = countUntilHead(probabilityCoinGenerator)
