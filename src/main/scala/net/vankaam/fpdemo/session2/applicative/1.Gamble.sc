@@ -17,7 +17,6 @@ val coinProbability = ProbabilityInstances.biasedCoin
 // Like the type of the coin, our gable will now return a probability that the guess is right
 val guessProbability: Probability[Boolean] = gamble(coinProbability,Head())
 
-
 val coinRandom = RandomInstances.fairCoin
 // We call the same method as above, but now we get a random instance that we can sample.
 // It will return either true or false depending whether the guess was correct

@@ -1,21 +1,22 @@
 import cats._
 import cats.implicits._
 import net.vankaam.fpdemo.model._
+import net.vankaam.fpdemo.session3.monad.RandomInstance._
+import net.vankaam.fpdemo.session3.monad.ProbabilityInstance._
 
-
-def countUntilHead[M[_]: Monad](coins: Iterator[M[Coin]], count: Int = 1): M[Int] = {
-  coins
-    .next()
-    .flatMap(value => {
-      if (value == Head()) {
-        Monad[M].pure(count)
-      } else {
-        countUntilHead(coins, count + 1)
-      }
-    })
+def countUntilHead[T[_]: Monad](coinGenerator: () => T[Coin], count: Int = 1): T[Int] = {
+  coinGenerator().flatMap(coin => {
+    if (coin == Head()) {
+      Monad[T].pure(count)
+    } else {
+      countUntilHead(coinGenerator, count + 1)
+    }
+  })
 }
 
-val infiniteRandomCoins = Iterator.continually(RandomInstances.fairCoin)
-val infiniteProbabilityCoins = Iterator.continually(ProbabilityInstances.fairCoin)
+val randomCoinGenerator: () => Random[Coin] = () => RandomInstances.fairCoin
+val headCount = countUntilHead(randomCoinGenerator)
 
-val randomUntilHead = countUntilHead(infiniteRandomCoins)
+// This will run forever
+//val probabilityCoinGenerator: () => Probability[Coin] = () => ProbabilityInstances.fairCoin
+//val probHeadCount = countUntilHead(probabilityCoinGenerator)
